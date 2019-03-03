@@ -32,6 +32,6 @@ while True:
                 api.update_status(f"Ich bin jetzt mit {game_name} live auf @TwitchDE! {TWITCH_URL}")
                 live = True
     except:
-        continue
         print("Failed")
+        pass
     time.sleep(15)
