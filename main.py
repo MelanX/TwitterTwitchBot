@@ -8,7 +8,7 @@ auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 
 twitch_client = TwitchHelix(client_id=TWITCH_ID)
-live = True
+live = False
 while True:
     try:
         stream = twitch_client.get_streams(user_logins=USER_LOGIN)
@@ -23,11 +23,11 @@ while True:
                 live = False
 
         else:
-            game_id = stream[0]["game_id"]
-            game = twitch_client.get_games(game_ids=game_id)
-            game_name = game[0]["name"]
-
             if live == False:
+                game_id = stream[0]["game_id"]
+                game = twitch_client.get_games(game_ids=game_id)
+                game_name = game[0]["name"]
+
                 # post tweet
                 api.update_status(f"Ich bin jetzt mit {game_name} live auf @TwitchDE! {TWITCH_URL}")
                 live = True
